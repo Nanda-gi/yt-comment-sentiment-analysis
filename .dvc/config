@@ -1,7 +1,5 @@
 [core]
     remote = remote
-['remote "myremote"']
-    url = s3://s3user
 ['remote "remote"']
     url = s3://s3user
     region = us-east-1
