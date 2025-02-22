@@ -43,6 +43,6 @@ stages:
     deps:
     - best_model.pkl
     - vectorizer.pkl
-    - data/processed/reddit_test.csv
+    - data/interim/reddit_test.csv
     - src/model/model_building.py
    

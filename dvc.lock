@@ -96,10 +96,10 @@ stages:
       hash: md5
       md5: f5405b546dc00b0c05bce1499c1dbc84
       size: 4081551
-    - path: data/processed/reddit_test.csv
+    - path: data/interim/reddit_test.csv
       hash: md5
-      md5: e4dfad66a762b9a1cced3ecc71b8ddae
-      size: 443958066
+      md5: 3d6256c8da5eea61ae1a2114765a9baa
+      size: 1527480
     - path: src/model/model_building.py
       hash: md5
       md5: ef41cca238f8180ad7730f27b77a35a9
