@@ -4,10 +4,11 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 import yaml
-def load_params(params_path):
-    n_gram=yaml.safe_load(open('params.yaml','r'))['feature_engineering']['n_gram']
-    max_features=yaml.safe_load(open('params.yaml','r'))['feature_engineering']['max_features']
-    return n_gram,max_features
+import pickle
+
+n_gram=tuple(yaml.safe_load(open('params.yaml','r'))['feature_engineering']['n_gram'])
+max_features=yaml.safe_load(open('params.yaml','r'))['feature_engineering']['max_features']
+   
 
 train_data=pd.read_csv('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\interim\\reddit_train.csv')
 test_data=pd.read_csv('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\interim\\reddit_test.csv')
@@ -29,5 +30,9 @@ train_df['label']=y_train
 test_df=pd.DataFrame(x_test_vec.toarray())
 test_df['label']=y_test
 
-train_df.to_csv(os.path.join('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\processed',"reddit_train.csv"),index=False)
-test_df.to_csv(os.path.join('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\processed',"reddit_test.csv"),index=False)
+datapath='C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\processed'
+os.makedirs(datapath,exist_ok=True)
+train_df.to_csv(os.path.join(datapath,"reddit_train.csv"),index=False)
+test_df.to_csv(os.path.join(datapath,"reddit_test.csv"),index=False)
+
+pickle.dump(vectorizer,open('vectorizer.pkl','wb'))

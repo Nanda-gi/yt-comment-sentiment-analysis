@@ -33,7 +33,7 @@ def read_data(url):
     df = pd.read_csv(url)
     return df
 def save_data(datapath,train_data,test_data):
-    
+    os.makedirs(datapath, exist_ok=True)
     train_data.to_csv(os.path.join(datapath,"reddit_train.csv"),index=False)
     test_data.to_csv(os.path.join(datapath,"reddit_test.csv"),index=False)
 
