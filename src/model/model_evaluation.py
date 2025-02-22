@@ -136,6 +136,7 @@ def main():
             # Load parameters from YAML file
             root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))
             params = load_params(os.path.join(root_dir, 'params.yaml'))
+            
 
             # Log parameters
             for key, value in params.items():
@@ -167,11 +168,12 @@ def main():
             )
 
             # Save model info
-            model_path = "lgbm_model"
+            artifact_uri=mlflow.get_artifact_uri()
+            model_path = f"{artifact_uri}/lgbm_model"
             save_model_info(run.info.run_id, model_path, 'experiment_info.json')
 
             # Log the vectorizer as an artifact
-            mlflow.log_artifact(os.path.join(root_dir, 'tfidf_vectorizer.pkl'))
+            mlflow.log_artifact(os.path.join(root_dir, 'vectorizer.pkl'))
 
             # Evaluate model and get metrics
             report, cm = evaluate_model(model, X_test_tfidf, y_test)
@@ -179,6 +181,7 @@ def main():
             # Log classification report metrics for the test data
             for label, metrics in report.items():
                 if isinstance(metrics, dict):
+                    print(label,metrics)
                     mlflow.log_metrics({
                         f"test_{label}_precision": metrics['precision'],
                         f"test_{label}_recall": metrics['recall'],

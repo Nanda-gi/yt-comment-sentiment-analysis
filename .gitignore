@@ -88,3 +88,4 @@ target/
 # Mypy cache
 .mypy_cache/
 /best_model.pkl
+/experiment_info.json
