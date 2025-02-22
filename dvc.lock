@@ -68,3 +68,43 @@ stages:
       hash: md5
       md5: 57831cbf0ac0e1fec6654eeaa14baaea
       size: 383908
+  model_building:
+    cmd: python src/model/model_building.py
+    deps:
+    - path: data/interim/reddit_train.csv
+      hash: md5
+      md5: c61673c9deb1f558447faaad29fe5cd1
+      size: 3655710
+    - path: src/model/model_building.py
+      hash: md5
+      md5: ef41cca238f8180ad7730f27b77a35a9
+      size: 922
+    params:
+      params.yaml:
+        model_building.learning_rate: 0.08
+        model_building.max_depth: 21
+        model_building.n_estimators: 367
+    outs:
+    - path: best_model.pkl
+      hash: md5
+      md5: 0d7116e508311bcc88245d45f8af888c
+      size: 4089216
+  model_evaluation:
+    cmd: python src/model/model_evaluation.py
+    deps:
+    - path: best_model.pkl
+      hash: md5
+      md5: 0d7116e508311bcc88245d45f8af888c
+      size: 4089216
+    - path: data/processed/reddit_test.csv
+      hash: md5
+      md5: e4dfad66a762b9a1cced3ecc71b8ddae
+      size: 443958066
+    - path: src/model/model_building.py
+      hash: md5
+      md5: ef41cca238f8180ad7730f27b77a35a9
+      size: 922
+    - path: vectorizer.pkl
+      hash: md5
+      md5: 57831cbf0ac0e1fec6654eeaa14baaea
+      size: 383908
