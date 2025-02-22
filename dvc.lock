@@ -82,20 +82,20 @@ stages:
     params:
       params.yaml:
         model_building.learning_rate: 0.08
-        model_building.max_depth: 21
+        model_building.max_depth: 20
         model_building.n_estimators: 367
     outs:
     - path: best_model.pkl
       hash: md5
-      md5: 0d7116e508311bcc88245d45f8af888c
-      size: 4089216
+      md5: f5405b546dc00b0c05bce1499c1dbc84
+      size: 4081551
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
     - path: best_model.pkl
       hash: md5
-      md5: 0d7116e508311bcc88245d45f8af888c
-      size: 4089216
+      md5: f5405b546dc00b0c05bce1499c1dbc84
+      size: 4081551
     - path: data/processed/reddit_test.csv
       hash: md5
       md5: e4dfad66a762b9a1cced3ecc71b8ddae
