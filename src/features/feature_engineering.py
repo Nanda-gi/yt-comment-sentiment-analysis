@@ -30,7 +30,7 @@ train_df['label']=y_train
 test_df=pd.DataFrame(x_test_vec.toarray())
 test_df['label']=y_test
 
-datapath='data\processed'
+datapath='data/processed'
 os.makedirs(datapath,exist_ok=True)
 train_df.to_csv(os.path.join(datapath,"reddit_train.csv"),index=False)
 test_df.to_csv(os.path.join(datapath,"reddit_test.csv"),index=False)
