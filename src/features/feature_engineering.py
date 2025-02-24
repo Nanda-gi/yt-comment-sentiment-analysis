@@ -10,8 +10,8 @@ n_gram=tuple(yaml.safe_load(open('params.yaml','r'))['feature_engineering']['n_g
 max_features=yaml.safe_load(open('params.yaml','r'))['feature_engineering']['max_features']
    
 
-train_data=pd.read_csv('data\\interim\\reddit_train.csv')
-test_data=pd.read_csv('data\\interim\\reddit_test.csv')
+train_data=pd.read_csv('./data/interim/reddit_train.csv')
+test_data=pd.read_csv('./data/interim/reddit_test.csv')
 train_data.dropna(inplace=True)
 test_data.dropna(inplace=True)
 x_train=train_data['clean_comment'].values

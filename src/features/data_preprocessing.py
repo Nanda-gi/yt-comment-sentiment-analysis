@@ -38,11 +38,11 @@ def save_data(datapath,train_data,test_data):
     test_data.to_csv(os.path.join(datapath,"reddit_test.csv"),index=False)
 
 def main():
-   train_data=read_data('data\\raw\\reddit_train.csv')
-   test_data=read_data('data\\raw\\reddit_test.csv')
+   train_data=read_data('./data/raw/reddit_train.csv')
+   test_data=read_data('./data/raw/reddit_test.csv')
    train_data['clean_comment']=train_data['clean_comment'].apply(processing)
    test_data['clean_comment']=test_data['clean_comment'].apply(processing)
-   save_data('data\\interim',train_data,test_data)
+   save_data('data/interim',train_data,test_data)
 
 if __name__=='__main__':
    main()
