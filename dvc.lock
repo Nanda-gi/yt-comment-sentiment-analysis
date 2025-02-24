@@ -82,13 +82,13 @@ stages:
     params:
       params.yaml:
         model_building.learning_rate: 0.07
-        model_building.max_depth: 20
+        model_building.max_depth: 21
         model_building.n_estimators: 367
     outs:
     - path: best_model.pkl
       hash: md5
-      md5: 4d229a9413d29affee8e93920327c0f3
-      size: 4089530
+      md5: e78a35f0d74e1ef50a6c228d29b7e878
+      size: 4091763
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
