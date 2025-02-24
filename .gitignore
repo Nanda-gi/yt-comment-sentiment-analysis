@@ -89,4 +89,5 @@ target/
 .mypy_cache/
 /best_model.pkl
 /experiment_info.json
+vectorizer.pkl
 
