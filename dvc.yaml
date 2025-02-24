@@ -44,13 +44,13 @@ stages:
     - best_model.pkl
     - vectorizer.pkl
     - data/interim/reddit_test.csv
-    - src/model/model_building.py
+    - src/model/model_evaluation.py
     outs:
     - experiment_info.json
   register_model:
     cmd: python src/model/register_model.py
     deps:
     - experiment_info.json
-    - src/model/model_building.py
+    - src/model/register_model.py
    
    
