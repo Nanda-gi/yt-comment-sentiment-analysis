@@ -1,9 +1,9 @@
 name: CI
 
-on   : push
+on: push
    
 
-jobs :
+jobs:
    model deployement:
        steps:
         -name: code checkout
