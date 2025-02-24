@@ -10,8 +10,8 @@ n_gram=tuple(yaml.safe_load(open('params.yaml','r'))['feature_engineering']['n_g
 max_features=yaml.safe_load(open('params.yaml','r'))['feature_engineering']['max_features']
    
 
-train_data=pd.read_csv('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\interim\\reddit_train.csv')
-test_data=pd.read_csv('C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\interim\\reddit_test.csv')
+train_data=pd.read_csv('data\\interim\\reddit_train.csv')
+test_data=pd.read_csv('data\\interim\\reddit_test.csv')
 train_data.dropna(inplace=True)
 test_data.dropna(inplace=True)
 x_train=train_data['clean_comment'].values
@@ -30,7 +30,7 @@ train_df['label']=y_train
 test_df=pd.DataFrame(x_test_vec.toarray())
 test_df['label']=y_test
 
-datapath='C:\\Users\\HP\\Desktop\\Youtube comment sentiment analysis\\data\\processed'
+datapath='data\processed'
 os.makedirs(datapath,exist_ok=True)
 train_df.to_csv(os.path.join(datapath,"reddit_train.csv"),index=False)
 test_df.to_csv(os.path.join(datapath,"reddit_test.csv"),index=False)
