@@ -73,9 +73,9 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
 
         # Predict using the model
        
-        y_pred_new = [model.predict(X_holdout_tfidf_df.iloc[i].values.reshape(1, -1))[0] for i in range(X_holdout_tfidf_df.shape[0])]
+        y_pred_new = model.predict(X_holdout_tfidf_df)
 
-        # Calculate performance metrics
+        # Calculate performance metrics 
         accuracy_new = accuracy_score(y_holdout, y_pred_new)
         precision_new = precision_score(y_holdout, y_pred_new, average='weighted', zero_division=1)
         recall_new = recall_score(y_holdout, y_pred_new, average='weighted', zero_division=1)
