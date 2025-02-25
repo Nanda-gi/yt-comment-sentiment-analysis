@@ -32,7 +32,7 @@ def processing(text):
   return text
 
 # Set your remote tracking URI
-mlflow.set_tracking_uri("http://ec2-51-20-129-94.eu-north-1.compute.amazonaws.com:5000/")
+mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
 
 @pytest.mark.parametrize("model_name, stage, holdout_data_path, vectorizer_path", [
     ("yt_chrome_plugin_model", "staging", "data/interim/test_processed.csv", "vectorizer.pkl"),  # Replace with your actual paths
@@ -59,7 +59,7 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         y_holdout = holdout_data.iloc[:, -1]  # Labels
 
         # Handle NaN values in the text data
-        X_holdout_raw = processing(X_holdout_raw)
+        X_holdout_raw = X_holdout_raw.apply(processing)
 
         # Apply TF-IDF transformation
         X_holdout_tfidf = vectorizer.transform(X_holdout_raw)
