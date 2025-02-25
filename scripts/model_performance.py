@@ -10,26 +10,6 @@ import re
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-def processing(text):
-  # lower the text
-  if pd.isnull(text):
-    return ""
-  else:
-    text=text.lower()
-  # remove URL from text
-  text=re.sub(r'https?://\S+|www\.\S+','',text)
-  # remove newline from text
-  text=re.sub(r'\n','',text)
-  # remove aplhanumeric from text
-  text=re.sub(r'[^a-zA-Z0-9\s!?.,]',"",text)
-  # remove stopwords from text
-  stop_words=list(set(stopwords.words("english")))
-  no_stop_words_sentiment=set(stop_words)-{'not','but','yet','however','no'}
-  text=" ".join([word for word in text.split(" ") if word not in no_stop_words_sentiment])
-  # do the lemmatization
-  lemmatizer=WordNetLemmatizer()
-  text=" ".join([lemmatizer.lemmatize(y) for y in text.split(" ")])
-  return text
 
 # Set your remote tracking URI
 mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
@@ -61,13 +41,16 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         # Handle NaN values in the text data
       
         X_holdout_raw = X_holdout_raw.fillna("")
-
+        
         # Apply TF-IDF transformation
+        
+        
         X_holdout_tfidf = vectorizer.transform(X_holdout_raw)
         X_holdout_tfidf_df = pd.DataFrame(X_holdout_tfidf.toarray(), columns=vectorizer.get_feature_names_out())
 
         # Predict using the model
-        y_pred_new = model.predict(X_holdout_tfidf_df)
+       
+        y_pred_new = [model.predict(X_holdout_tfidf_df.iloc[i].values.reshape(1, -1))[0] for i in range(X_holdout_tfidf_df.shape[0])]
 
         # Calculate performance metrics
         accuracy_new = accuracy_score(y_holdout, y_pred_new)
