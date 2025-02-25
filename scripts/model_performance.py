@@ -59,7 +59,7 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         y_holdout = holdout_data.iloc[:, -1]  # Labels
 
         # Handle NaN values in the text data
-        X_holdout_raw = X_holdout_raw.apply(processing)
+      
         X_holdout_raw = X_holdout_raw.fillna("")
 
         # Apply TF-IDF transformation
