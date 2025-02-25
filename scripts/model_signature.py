@@ -3,6 +3,34 @@ import pytest
 import pandas as pd
 import pickle
 from mlflow.tracking import MlflowClient
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+def processing(text):
+  # lower the text
+  if pd.isnull(text):
+    return ""
+  else:
+    text=text.lower()
+  # remove URL from text
+  text=re.sub(r'https?://\S+|www\.\S+','',text)
+  # remove newline from text
+  text=re.sub(r'\n','',text)
+  # remove aplhanumeric from text
+  text=re.sub(r'[^a-zA-Z0-9\s!?.,]',"",text)
+  # remove stopwords from text
+  stop_words=list(set(stopwords.words("english")))
+  no_stop_words_sentiment=set(stop_words)-{'not','but','yet','however','no'}
+  text=" ".join([word for word in text.split(" ") if word not in no_stop_words_sentiment])
+  # do the lemmatization
+  lemmatizer=WordNetLemmatizer()
+  text=" ".join([lemmatizer.lemmatize(y) for y in text.split(" ")])
+  return text
+
 
 # Set your remote tracking URI
 mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
@@ -30,6 +58,7 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
 
         # Create a dummy input for the model
         input_text = "hi how are you"
+        input_text = processing(input_text)
         input_data = vectorizer.transform([input_text])
         input_df = pd.DataFrame(input_data.toarray(), columns=vectorizer.get_feature_names_out())  # <-- Use correct feature names
 

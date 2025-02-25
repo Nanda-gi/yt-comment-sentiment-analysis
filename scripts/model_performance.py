@@ -3,12 +3,39 @@ import pandas as pd
 import pickle
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import mlflow
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import re
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+def processing(text):
+  # lower the text
+  if pd.isnull(text):
+    return ""
+  else:
+    text=text.lower()
+  # remove URL from text
+  text=re.sub(r'https?://\S+|www\.\S+','',text)
+  # remove newline from text
+  text=re.sub(r'\n','',text)
+  # remove aplhanumeric from text
+  text=re.sub(r'[^a-zA-Z0-9\s!?.,]',"",text)
+  # remove stopwords from text
+  stop_words=list(set(stopwords.words("english")))
+  no_stop_words_sentiment=set(stop_words)-{'not','but','yet','however','no'}
+  text=" ".join([word for word in text.split(" ") if word not in no_stop_words_sentiment])
+  # do the lemmatization
+  lemmatizer=WordNetLemmatizer()
+  text=" ".join([lemmatizer.lemmatize(y) for y in text.split(" ")])
+  return text
 
 # Set your remote tracking URI
 mlflow.set_tracking_uri("http://ec2-51-20-129-94.eu-north-1.compute.amazonaws.com:5000/")
 
 @pytest.mark.parametrize("model_name, stage, holdout_data_path, vectorizer_path", [
-    ("yt_chrome_plugin_model", "staging", "data/interim/test_processed.csv", "tfidf_vectorizer.pkl"),  # Replace with your actual paths
+    ("yt_chrome_plugin_model", "staging", "data/interim/test_processed.csv", "vectorizer.pkl"),  # Replace with your actual paths
 ])
 def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path):
     try:
@@ -32,7 +59,7 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         y_holdout = holdout_data.iloc[:, -1]  # Labels
 
         # Handle NaN values in the text data
-        X_holdout_raw = X_holdout_raw.fillna("")
+        X_holdout_raw = processing(X_holdout_raw)
 
         # Apply TF-IDF transformation
         X_holdout_tfidf = vectorizer.transform(X_holdout_raw)
