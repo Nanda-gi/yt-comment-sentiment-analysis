@@ -51,13 +51,18 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
         # Load the latest version of the model
         model_uri = f"models:/{model_name}/{latest_version}"
         model = mlflow.pyfunc.load_model(model_uri)
+        model_signature = model.metadata.get_input_schema()
+        print("Model expected schema:", model_signature)
+
 
         # Load the vectorizer
         with open(vectorizer_path, 'rb') as file:
             vectorizer = pickle.load(file)
+        vectorizer_features = vectorizer.get_feature_names_out()
+        print("Vectorizer feature names:", vectorizer_features)
 
         # Create a dummy input for the model
-        input_text = "hi how are you"
+        input_text = "weekend work youtube video"
         input_text = processing(input_text)
         input_data = vectorizer.transform([input_text])
         input_df = pd.DataFrame(input_data.toarray(), columns=vectorizer.get_feature_names_out())  # <-- Use correct feature names
@@ -75,3 +80,5 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
 
     except Exception as e:
         pytest.fail(f"Model test failed with error: {e}")
+
+   
