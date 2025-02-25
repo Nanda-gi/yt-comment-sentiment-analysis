@@ -66,7 +66,7 @@ stages:
       nfiles: 2
     - path: vectorizer.pkl
       hash: md5
-      md5: 659149fe68f579ca7483e14bc768cf4c
+      md5: 36ae60185ae7525500c43ac008315c37
       size: 383914
   model_building:
     cmd: python src/model/model_building.py
@@ -106,19 +106,19 @@ stages:
       size: 7173
     - path: vectorizer.pkl
       hash: md5
-      md5: 659149fe68f579ca7483e14bc768cf4c
+      md5: 36ae60185ae7525500c43ac008315c37
       size: 383914
     outs:
     - path: experiment_info.json
       hash: md5
-      md5: db33c92fd6ad4bc5b647ab786ddea624
+      md5: 75392048f690f55458dea5197e3aac12
       size: 84
   register_model:
     cmd: python src/model/register_model.py
     deps:
     - path: experiment_info.json
       hash: md5
-      md5: db33c92fd6ad4bc5b647ab786ddea624
+      md5: 75392048f690f55458dea5197e3aac12
       size: 84
     - path: src/model/register_model.py
       hash: md5
