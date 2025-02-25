@@ -16,7 +16,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.13'  # Fixed the key name (was "python versions")
+          python-version: '3.10'  # Fixed the key name (was "python versions")
 
       - name: Cache pip dependencies
         uses: actions/cache@v3
