@@ -55,7 +55,7 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
 
         # Load the holdout test data
         holdout_data = pd.read_csv(holdout_data_path)
-        X_holdout_raw = holdout_data.iloc[:, :-1].squeeze()  # Raw text features (assuming text is in the first column)
+        X_holdout_raw = holdout_data.iloc[:, 0].astype(str)   # Raw text features (assuming text is in the first column)
         y_holdout = holdout_data.iloc[:, -1]  # Labels
 
         # Handle NaN values in the text data
