@@ -73,6 +73,7 @@ def test_model_with_vectorizer(model_name, stage, vectorizer_path):
         input_df = pd.DataFrame(input_data.toarray(), columns=vectorizer.get_feature_names_out())  # <-- Use correct feature names
         expected_columns = model.metadata.get_input_schema().input_names()
         input_df = input_df.reindex(columns=expected_columns, fill_value=0)
+        input_df = input_df.astype(float)
         # Predict using the model
         prediction = model.predict(input_df)
 
