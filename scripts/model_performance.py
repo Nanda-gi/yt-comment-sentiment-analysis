@@ -67,6 +67,9 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         
         X_holdout_tfidf = vectorizer.transform(X_holdout_raw)
         X_holdout_tfidf_df = pd.DataFrame(X_holdout_tfidf.toarray(), columns=vectorizer.get_feature_names_out())
+        expected_columns = model.metadata.get_input_schema().input_names()
+        X_holdout_tfidf_df = X_holdout_tfidf_df.reindex(columns=expected_columns, fill_value=0)
+        X_holdout_tfidf_df = X_holdout_tfidf_df.astype(float)
 
         # Predict using the model
        
