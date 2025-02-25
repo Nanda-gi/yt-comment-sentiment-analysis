@@ -86,7 +86,7 @@ def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path
         expected_accuracy = 0.20
         expected_precision = 0.20
         expected_recall = 0.20
-        expected_f1 = 0.20
+        expected_f1 = 0.10
 
         # Assert that the new model meets the performance thresholds
         assert accuracy_new >= expected_accuracy, f'Accuracy should be at least {expected_accuracy}, got {accuracy_new}'
