@@ -36,7 +36,7 @@ def processing(text):
 mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
 
 @pytest.mark.parametrize("model_name, stage, vectorizer_path", [
-    ("yt_chrome_plugin_model", "staging", "vectorizer.pkl"),  # Replace with your actual model name and vectorizer path
+    ("mymodel", "staging", "vectorizer.pkl"),  # Replace with your actual model name and vectorizer path
 ])
 def test_model_with_vectorizer(model_name, stage, vectorizer_path):
     client = MlflowClient()

@@ -34,7 +34,7 @@ def processing(text):
 mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
 
 @pytest.mark.parametrize("model_name, stage, holdout_data_path, vectorizer_path", [
-    ("yt_chrome_plugin_model", "staging", "data/processed/reddit_test.csv", "vectorizer.pkl"),  # Replace with your actual paths
+    ("mymodel", "staging", "data/processed/reddit_test.csv", "vectorizer.pkl"),  # Replace with your actual paths
 ])
 def test_model_performance(model_name, stage, holdout_data_path, vectorizer_path):
     try:
