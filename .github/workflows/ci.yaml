@@ -103,3 +103,13 @@ jobs:
           AWS_DEFAULT_REGION: eu-north-1
         run: python scripts/promote_model.py
 
+      - name: Run flask app
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: eu-north-1
+        run: nohup python flask/app.py
+      
+      - name: Run flask api tests
+        run: pytest scripts/flask_api.py
+
