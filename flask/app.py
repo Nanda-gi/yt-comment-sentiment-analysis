@@ -13,7 +13,7 @@ CORS(app)
 
 def load_model_vectorizer(model_name,model_version,vectorizer_path):
     try:
-        mlflow.set_tracking_uri("http://ec2-51-20-129-94.eu-north-1.compute.amazonaws.com:5000/")
+        mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
         model_uri=f'models:/{model_name}/{model_version}'
         model=mlflow.pyfunc.load_model(model_uri)
         with open(vectorizer_path, 'rb') as file:
