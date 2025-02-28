@@ -109,14 +109,21 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-north-1
         run: |
-          nohup python flask/app.py &
+          nohup python flask/app.py > flask.log 2>&1 &
           sleep 30s
           
       
-      - name: Run flask api tests
+      - name: Check running processes
+        run: ps aux | grep flask
+
+      - name: Test Flask server health
         run: |
-          pytest scripts/flask_api_test.py
-        
+         curl -i http://127.0.0.1:5000/health || echo "Flask is not responding"
+
+      - name: Run Flask API tests
+        run: |
+         pytest scripts/flask_api_test.py
+
       - name: Show Flask logs
         if: failure()
         run: cat flask.log
