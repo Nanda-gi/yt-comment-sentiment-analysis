@@ -1,18 +1,7 @@
+import mlflow.pyfunc
 
-from flask import Flask,request,jsonify
-from flask_cors import CORS
-
-
-app=Flask(__name__)
-
-
-@app.route("/")
-def home():
-    return 'hi'
-
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+mlflow.set_tracking_uri("http://ec2-13-61-13-214.eu-north-1.compute.amazonaws.com:5000/")
+model_name='mymodel'
+model_version='43'
+model_uri=f'models:/{model_name}/{model_version}'
+print(mlflow.pyfunc.get_model_dependencies(model_uri=model_uri))
