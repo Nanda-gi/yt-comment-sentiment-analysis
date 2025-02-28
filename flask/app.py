@@ -69,5 +69,9 @@ def predict():
     except Exception as e:
         return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "ok"}), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000,debug=True)
