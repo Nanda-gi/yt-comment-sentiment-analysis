@@ -110,11 +110,15 @@ jobs:
           AWS_DEFAULT_REGION: eu-north-1
         run: |
           nohup python flask/app.py &
-          sleep 10s
+          sleep 30s
           
       
       - name: Run flask api tests
         run: |
           pytest scripts/flask_api_test.py
+        
+      - name: Show Flask logs
+        if: failure()
+        run: cat flask.log
 
 
