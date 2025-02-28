@@ -109,8 +109,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: eu-north-1
         run: |
-          python flask/app.py &
-          sleep 10
+          nohup python flask/app.py &
+          
       
       - name: Run flask api tests
         run: |
