@@ -6,5 +6,6 @@ feature_engineering:
 model_building:
   n_estimators: 367
   learning_rate: 0.07
-  max_depth: 21
+  max_depth: 20
+  
    
