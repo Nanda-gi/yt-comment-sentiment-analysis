@@ -66,7 +66,7 @@ stages:
       nfiles: 2
     - path: vectorizer.pkl
       hash: md5
-      md5: 06291a79e1cd8a850984eea0c118f95a
+      md5: 8e372fd91623ea8b38a773a25efbed96
       size: 383950
   model_building:
     cmd: python src/model/model_building.py
@@ -87,15 +87,15 @@ stages:
     outs:
     - path: best_model.pkl
       hash: md5
-      md5: 5e11a42af3577821a4609250f60d2459
-      size: 4093209
+      md5: 087f18a567af90bb4558b230b68c3e16
+      size: 4093221
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
     - path: best_model.pkl
       hash: md5
-      md5: 5e11a42af3577821a4609250f60d2459
-      size: 4093209
+      md5: 087f18a567af90bb4558b230b68c3e16
+      size: 4093221
     - path: data/interim/reddit_test.csv
       hash: md5
       md5: 0312e34982c645d8d48c020c46951733
@@ -106,19 +106,19 @@ stages:
       size: 7173
     - path: vectorizer.pkl
       hash: md5
-      md5: 06291a79e1cd8a850984eea0c118f95a
+      md5: 8e372fd91623ea8b38a773a25efbed96
       size: 383950
     outs:
     - path: experiment_info.json
       hash: md5
-      md5: 1f26b347d9f5b4d8006e1cd7e549e640
+      md5: 4b9304af0511f280a25af43021a4f8e9
       size: 84
   register_model:
     cmd: python src/model/register_model.py
     deps:
     - path: experiment_info.json
       hash: md5
-      md5: 1f26b347d9f5b4d8006e1cd7e549e640
+      md5: 4b9304af0511f280a25af43021a4f8e9
       size: 84
     - path: src/model/register_model.py
       hash: md5
