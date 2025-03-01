@@ -90,4 +90,5 @@ target/
 /best_model.pkl
 /experiment_info.json
 vectorizer.pkl
+venv
 
