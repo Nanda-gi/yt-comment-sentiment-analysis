@@ -62,6 +62,9 @@ def predict():
     preprocessed_comment=[processing(comment) for comment in comments]
     vectorized_comment=vectorizer.transform(preprocessed_comment)
     vectorized_df = pd.DataFrame(vectorized_comment.toarray(), columns=vectorizer.get_feature_names_out())
+    expected_columns = model.metadata.get_input_schema().input_names()
+    vectorized_df = vectorized_df.reindex(columns=expected_columns, fill_value=0)
+    vectorized_df = vectorized_df.astype(float)
     try:
         predict=model.predict(vectorized_df).tolist()
         response=[{'comment':comment,"sentiment":sentiment} for comment,sentiment in zip(preprocessed_comment,predict)]
