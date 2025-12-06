@@ -1,0 +1,22 @@
+artifact_path: file:c:/Users/HP/Downloads/vc-emotion-detection-master/notebooks/mlruns/0/models/m-6e00c0f052cd4f43aee5f5e8e20b5f59/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.3
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.7.0
+model_id: m-6e00c0f052cd4f43aee5f5e8e20b5f59
+model_size_bytes: 8720
+model_uuid: m-6e00c0f052cd4f43aee5f5e8e20b5f59
+prompts: null
+run_id: b9f70c97b12340bc8a2eaf8c7085c61a
+utc_time_created: '2025-12-06 05:27:33.959588'
