@@ -5,37 +5,37 @@ stages:
     deps:
     - path: src/data/data_ingestion.py
       hash: md5
-      md5: ce7e81ff3aad253ffb3174ba743a6d63
-      size: 1229
+      md5: 8d21565a7f9a5a8f1290219d0b0412f2
+      size: 1265
     params:
       params.yaml:
         data_ingestion.test_size: 0.3
     outs:
     - path: data/raw
       hash: md5
-      md5: 5a99116af07b71826f6fdddc8cbafae3.dir
-      size: 6881952
+      md5: f88ef22c7f1db6c243413655e0d4ff13.dir
+      size: 6918747
       nfiles: 2
   data_preprocessing:
     cmd: python src/features/data_preprocessing.py
     deps:
     - path: data/raw/reddit_test.csv
       hash: md5
-      md5: 55b43f80d27384d519e4c91ee3e1bf0d
-      size: 2025941
+      md5: 08a34a5cf71e671d5323785eab74d774
+      size: 2729295
     - path: data/raw/reddit_train.csv
       hash: md5
-      md5: e738f469ab14834d1d9c8f643a848a34
-      size: 4856011
+      md5: 77f226dc99f2229d53dd459f5bb78e77
+      size: 4189452
     - path: src/features/data_preprocessing.py
       hash: md5
-      md5: e61c55fa3e9c96a0bf04e7aecd6c49a9
-      size: 1615
+      md5: 605633e5d0766d00a8ea43f30d63b8f6
+      size: 1662
     outs:
     - path: data/interim
       hash: md5
-      md5: d3f9dd67f12b1a21bdf8c0c6552bcd92.dir
-      size: 5144273
+      md5: ea6379e5f36308606150841fadbe5983.dir
+      size: 5183190
       nfiles: 2
   feature_engineering:
     cmd: python src/features/feature_engineering.py

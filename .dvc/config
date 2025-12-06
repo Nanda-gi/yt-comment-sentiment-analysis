@@ -1,7 +1,4 @@
 [core]
     remote = myremote
-['remote "remote"']
-    url = s3://s3user
-    region = us-east-1
 ['remote "myremote"']
-    url = s3://youtubecommentdvc
+    url = C:\Users\HP\AppData\Local\Temp
