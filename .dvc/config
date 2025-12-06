@@ -1,4 +1,4 @@
 [core]
-    remote = myremote
-['remote "myremote"']
+    remote = origin
+['remote "origin"']
     url = C:\Users\HP\AppData\Local\Temp
