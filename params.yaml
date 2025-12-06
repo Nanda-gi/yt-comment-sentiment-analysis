@@ -4,6 +4,3 @@ data_ingestion:
 
 feature_engineering:
   max_features: 6000
-
-  
-   
