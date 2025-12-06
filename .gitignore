@@ -91,4 +91,6 @@ target/
 /experiment_info.json
 vectorizer.pkl
 venv
+vc-emotion-detection-master
+
 
