@@ -20,8 +20,8 @@ import os
 
 import dagshub
 
-mlflow.set_tracking_uri('https://dagshub.com/campusx-official/mlops-mini-project.mlflow')
-dagshub.init(repo_owner='campusx-official', repo_name='mlops-mini-project', mlflow=True)
+mlflow.set_tracking_uri("https://dagshub.com/Nanda-gi/yt-comment-sentiment-analysis.mlflow")
+dagshub.init(repo_owner='Nanda-gi', repo_name='yt-comment-sentiment-analysis', mlflow=True)
 
 # Load the data
 df = pd.read_csv('https://raw.githubusercontent.com/campusx-official/jupyter-masterclass/main/tweet_emotions.csv').drop(columns=['tweet_id'])
