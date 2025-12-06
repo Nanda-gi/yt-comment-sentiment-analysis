@@ -44,62 +44,58 @@ stages:
       nfiles: 2
     - path: src/features/feature_engineering.py
       hash: md5
-      md5: 5bbdee53a7f23fe94b3d0d470410cf06
-      size: 3660
+      md5: a4e2c9d9336aabf06653beacce87912e
+      size: 3770
     params:
       params.yaml:
         feature_engineering.max_features: 6000
     outs:
     - path: data/processed
       hash: md5
-      md5: 3e6fdf57f6fa20c29234319fd249815e.dir
-      size: 250148058
+      md5: bb8280f0347b3e636d933e25b37b9aa3.dir
+      size: 124576916
       nfiles: 2
+    - path: models/vectorizer.pkl
+      hash: md5
+      md5: 85e68b56677f9cddac32c3ae1469022b
+      size: 170946
   model_building:
     cmd: python src/model/model_building.py
     deps:
-    - path: data/interim/reddit_train.csv
+    - path: data/processed
       hash: md5
-      md5: 01bc4283016d249054a11ce3868d0264
-      size: 3628471
+      md5: bb8280f0347b3e636d933e25b37b9aa3.dir
+      size: 124576916
+      nfiles: 2
     - path: src/model/model_building.py
       hash: md5
-      md5: b12433eeef3e5e175b9a293ddf01a40f
-      size: 841
-    params:
-      params.yaml:
-        model_building.learning_rate: 0.07
-        model_building.max_depth: 20
-        model_building.n_estimators: 367
+      md5: 4d89bb8181366c524ab585b55705b265
+      size: 2298
     outs:
-    - path: best_model.pkl
+    - path: models/model.pkl
       hash: md5
-      md5: 6aeb1a8a3a82c7b11668aeb0a8b72c99
-      size: 4087302
+      md5: 09977e5913d4047f301b4cee5b9d56f4
+      size: 48717
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
-    - path: best_model.pkl
+    - path: models/model.pkl
       hash: md5
-      md5: 6aeb1a8a3a82c7b11668aeb0a8b72c99
-      size: 4087302
-    - path: data/interim/reddit_test.csv
-      hash: md5
-      md5: 0312e34982c645d8d48c020c46951733
-      size: 1515802
+      md5: 09977e5913d4047f301b4cee5b9d56f4
+      size: 48717
     - path: src/model/model_evaluation.py
       hash: md5
-      md5: 12d07cb29124b018443dd9b8a99f1c97
-      size: 7173
-    - path: vectorizer.pkl
-      hash: md5
-      md5: 897eeee21644104ad124745bf71ed87a
-      size: 383950
+      md5: dd39acb6b300205a5609029d4b07dcbf
+      size: 5263
     outs:
-    - path: experiment_info.json
+    - path: reports/experiment_info.json
       hash: md5
-      md5: 63b600def6d6caf9b7058825458693a7
-      size: 84
+      md5: c1e51b4316c4f22abb0a09e2eed36e50
+      size: 82
+    - path: reports/metrics.json
+      hash: md5
+      md5: cdf52453f3bb94658780b770b3551481
+      size: 145
   register_model:
     cmd: python src/model/register_model.py
     deps:
